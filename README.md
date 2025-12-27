@@ -1,180 +1,150 @@
-# 🔒 CySA Security Operations Lab
+# 🛡️ Enterprise Security Lab
 
-## 📋 Project Overview
-A comprehensive hands-on cybersecurity lab completed as part of CySA+ preparation, simulating real-world security operations in an enterprise network environment. This project demonstrates practical skills in network security, threat detection, and vulnerability management using industry-standard tools.
-
-## 🎯 Lab Objectives
-- Set up a complete virtualized network environment using VMware and GNS3
-- Perform network reconnaissance and service enumeration
-- Analyze network traffic for security insights
-- Conduct vulnerability assessments
-- Test security controls and implement mitigations
-- Document findings and security recommendations
-
-## 🛠️ Tools & Technologies Used
-| Category | Tools |
-|----------|-------|
-| Virtualization | VMware Workstation, GNS3 |
-| Operating Systems | Windows Server 2016, Kali Linux |
-| Network Devices | Cisco IOS Router |
-| Security Tools | Nmap, Wireshark, Nessus, Hydra |
-| Analysis | Packet analysis, Log review, Vulnerability assessment |
-
-## 📁 Project Structure
-Security-Operations-Lab/
-├── documentation/ # Project documentation and objectives
-├── lab-setup/ # VM and network configuration
-├── network-analysis/ # Scanning and traffic analysis
-├── security-testing/ # Vulnerability and security testing
-├── screenshots/ # Visual evidence and results
-└── resources/ # Reference materials and links
-
-
-## 🚀 Getting Started
-### Prerequisites
-- VMware Workstation or VirtualBox
-- GNS3 network emulator
-- Windows Server 2016 ISO
-- Kali Linux ISO
-- Basic understanding of networking concepts
-
-### Quick Start
-1. Review the `lab-setup/` documentation for environment configuration
-2. Follow the network analysis procedures in `network-analysis/`
-3. Implement security tests as outlined in `security-testing/`
-4. Refer to screenshots for expected results
-
-## 🔍 Key Activities Demonstrated
-1. **Network Infrastructure Setup**: Configured virtual machines and network topology
-2. **Network Reconnaissance**: Used Nmap for host discovery and service enumeration
-3. **Traffic Analysis**: Captured and analyzed network packets with Wireshark
-4. **Vulnerability Assessment**: Set up and ran Nessus vulnerability scans
-5. **Security Testing**: Conducted SSH security testing with Hydra
-6. **Security Controls**: Documented mitigation strategies for identified risks
-
-## 💡 Skills Developed
-- **Technical Skills**: Network configuration, security tool usage, traffic analysis
-- **Analytical Skills**: Threat identification, vulnerability assessment, risk analysis
-- **Documentation**: Professional reporting, evidence collection, procedure documentation
-- **Problem-Solving**: Troubleshooting network issues, implementing security controls
-
-## 📈 Learning Outcomes
-This project provided hands-on experience with:
-- Enterprise network architecture and segmentation
-- Security monitoring and threat detection principles
-- Vulnerability management lifecycle
-- Security tool deployment and configuration
-- Professional security documentation practices
-
-## 👤 Author
-**Phindile Hlubi**  
-Network & Security Engineering Graduate  
-*This project was completed as practical preparation for cybersecurity operations roles.*
-
-## 📄 License
-This project is for educational purposes. All tools and software used are property of their respective owners.
+**Simulating Enterprise Network Security: Reconnaissance, Vulnerability Assessment, and Intrusion Detection**
 
 ---
-*Note: This lab was conducted in a controlled environment for learning purposes only.*
 
-1. documentation/project_overview.md:
+## Project Overview
 
-# Project Overview
+This project simulates a real-world enterprise network environment and demonstrates applied cybersecurity skills, including:
 
-## Purpose
-This lab simulates security operations in a corporate network environment, providing hands-on experience with security tools and techniques used by cybersecurity professionals.
+- Network reconnaissance and traffic analysis  
+- Password-based attacks on SSH services  
+- Vulnerability scanning and remediation  
+- Intrusion detection using Snort  
 
-## Scope
-- Virtual environment setup with multiple operating systems
-- Network configuration and segmentation
-- Security assessment and testing
-- Documentation and reporting
+The lab environment reflects **DelTech Services**, a hypothetical company, where tasks were performed in a **safe virtual environment** to prevent downtime on live systems.
 
-## Methodology
-The project follows a structured approach:
-1. Environment setup and configuration
-2. Network discovery and analysis
-3. Security testing and assessment
-4. Findings documentation
-5. Mitigation recommendations
+---
 
-2. lab-setup/vmware_configuration.md:
+## Scenario / Problem
 
-# VMware Virtual Machine Configuration
+As an IT Security Analyst at DelTech Services, the task was to assess the company’s network for potential security threats, including:
 
-## Windows Server 2016 Setup
-- **VMware Workstation 17.5.x**
-- **Configuration Type**: Custom (advanced)
-- **Memory**: 2 GB RAM
-- **Processors**: 2 CPU cores
-- **Hard Disk**: 300 GB (split into multiple files)
-- **Network Adapter**: NAT
-- **Operating System**: Windows Server 2016 Standard Evaluation
+- Active reconnaissance by potential attackers  
+- SSH brute-force attempts  
+- Identifying vulnerabilities in critical systems  
+- Demonstrating mitigation and defense strategies  
 
-## Kali Linux 2019 Setup
-- **Installer**: ISO image file
-- **Installation Type**: Graphical install
-- **Network Configuration**: DHCP via router
-- **Tools Pre-installed**: Nmap, Wireshark, Hydra
+The challenge was to **identify and analyze threats while simulating enterprise-level security monitoring**, using virtualized systems.
 
-## Network Configuration
-- Router: Cisco 3745 (IOS version 124-25d)
-- Interface Configuration:
-  - FastEthernet0/0: 10.10.10.10/24 (connected to Kali)
-  - FastEthernet0/1: 192.168.10.200/24 (connected to Windows Server)
-- DHCP pool configured for 10.10.10.0/24 network
+---
 
-  3. network-analysis/nmap_scan_results.md:
+## Tools & Technologies Used
 
-# Nmap Scanning Results
+| Category           | Tools / Software |
+|-------------------|----------------|
+| Virtualization     | VMware Workstation, GNS3 |
+| Operating Systems  | Windows Server 2016, Kali Linux 2019.3 |
+| Network Devices    | Cisco 3745 IOS Router, Ethernet switch |
+| Security Testing   | Nmap, ncrack, Hydra, Nessus 8.8.0, OpenSSH |
+| Intrusion Detection| Snort 2.9.15 |
+| Analysis & Scripting| Wireshark 3.0.6, Bash, Windows CLI |
 
-## Ping Sweep
-root@kali:~# nmap -sn 192.168.10.0/24
+---
 
-Findings: Identified 1 active host (192.168.10.200)
+## Workflow / Key Steps
 
-Operating system detection
-root@kali:~# nmap -O -Pn 192.168.10.200
+1. **Virtual Environment Setup**  
+   - Imported Windows Server, Kali Linux, and GNS3 VMware images  
+   - Configured Windows Server as a Domain Controller with TCP/IP and firewall rules  
 
-Findings:
+2. **GNS3 Lab Configuration**  
+   - Created project workspace with all appliances (Windows Server, Kali Linux, Cisco router, Ethernet switch)  
+   - Configured Cisco 3745 router interfaces and DHCP for Kali Linux  
 
-Device type: Cisco router
+3. **Network Reconnaissance**  
+   - Used Nmap for ping sweeps, OS discovery, and service enumeration  
+   - Captured traffic with Wireshark  
 
-Running: Cisco IOS 12.X|15.X
+   ![Nmap Scan](screenshots/nmap_scan.png)
+   ![Wireshark Capture](screenshots/wireshark_capture.png)
 
-Open port: 23/tcp (telnet)
+4. **Traffic Analysis**  
+   - Analyzed captured packets in Wireshark  
+   - Created filters for Kali Linux IP and ports 53 & 445  
+   - Examined TCP flags (SYN, ACK, RST) to interpret network behavior  
 
-Service Enumeration
-root@kali:~# nmap -sS 192.168.10.1
+5. **SSH Brute Force Attack**  
+   - Installed OpenSSH on Windows Server  
+   - Configured inbound firewall rules for TCP port 22  
+   - Used ncrack with password dictionary (`top50000.pwd`) to gain SSH access  
+   - Executed network commands and created proof-of-access file (`Gotin.txt`)  
 
-Findings: Multiple services identified including SSH (22/tcp), DNS (53/tcp), LDAP (389/tcp)
+   ![SSH Attack](screenshots/ssh_attack.png)
 
+6. **Vulnerability Scanning**  
+   - Ran Nessus scan on Windows Server to identify vulnerabilities  
+   - Documented findings and remediation steps  
 
-**4. security-testing/ssh_brute_force_test.md:**
-```markdown
-# SSH Security Testing
+   ![Nessus Scan](screenshots/nessus_scan.png)
 
-## Objective
-Test SSH service vulnerability to brute-force attacks and document mitigation strategies.
+7. **Intrusion Detection with Snort**  
+   - Installed Snort and configured rules for SSH and SYN scan detection  
+   - Monitored alerts during Nmap scans and SSH attacks  
 
-## Tools Used
-- Hydra (for brute-force testing)
-- Ncrack (password cracking tool)
-- Common password lists (top50000.pwd, common.usr)
+   ![Snort Alert](screenshots/snort_alert.png)
 
-## Test Procedure
-1. Identified SSH service on target
-2. Attempted brute-force using common credentials
-3. Documented results and failure rates
-4. Analyzed security implications
+---
 
-## Key Finding
-- SSH service was resistant to automated attacks with default settings
-- Multiple failed attempts triggered security mechanisms
-- Importance of strong authentication demonstrated
+## Results / Outcomes
 
-## Security Recommendations
-1. Implement account lockout policies
-2. Use key-based authentication instead of passwords
-3. Restrict SSH access to specific IP addresses
-4. Monitor and log all SSH access attempts
+- Successfully simulated an enterprise-level network for security testing  
+- Identified vulnerabilities and demonstrated mitigation strategies  
+- Captured and analyzed network traffic using Wireshark  
+- Gained SSH access in a controlled environment to demonstrate potential attack vectors  
+- Configured Snort IDS to detect reconnaissance and SSH brute-force attacks  
+- Documented all findings in a structured report  
+
+---
+
+## Folder Contents
+
+- [docs/](docs/) — Detailed project documentation and lab report  
+- [lab-setup/](lab-setup/) — VM and network configuration files  
+- [network-analysis/](network-analysis/) — Scans and packet captures  
+- [security-testing/](security-testing/) — SSH, vulnerability, and IDS test files  
+- [screenshots/](screenshots/) — Visual evidence of key steps and results  
+- [resources/](resources/) — Password dictionaries, Snort rules, reference materials  
+
+---
+
+## Professional Skills Demonstrated
+
+- Network and security configuration and troubleshooting  
+- Applied penetration testing methodology  
+- Traffic analysis and incident response understanding  
+- Professional documentation and reporting  
+- Problem-solving and critical thinking in simulated enterprise environments  
+
+---
+
+## Challenges & Learnings
+
+- Managing multiple virtual machines and network configurations simultaneously  
+- Interpreting complex packet captures in Wireshark  
+- Learning Snort IDS rule creation and validation  
+- Recognizing the importance of systematic documentation and screenshots for reproducibility  
+
+---
+
+## Next Steps / Improvements
+
+- Expand lab to simulate web application vulnerabilities and phishing scenarios  
+- Automate scans and alerts for more realistic threat simulation  
+- Integrate SIEM tools for enterprise-level monitoring  
+
+---
+
+## Contact & References
+
+LinkedIn: [https://linkedin.com/in/jessica-hlubi-80a915361](https://linkedin.com/in/jessica-hlubi-80a915361)  
+Email: jessicahlubi@gmail.com  
+
+---
+
+✅ **Instructions:**  
+1. Place your screenshots in the `screenshots/` folder with the same filenames used in this README (`nmap_scan.png`, `wireshark_capture.png`, `ssh_attack.png`, `nessus_scan.png`, `snort_alert.png`).  
+2. Make sure your detailed lab report is in `docs/`.  
+3. Keep your configuration and test scripts in their respective folders (`lab-setup/` and `security-testing/`).  
+
